@@ -138,7 +138,29 @@
         </div>
 
         <div class="contact-grid">
-          <form class="contact-form" id="contact-form">
+          <form
+            class="contact-form"
+            id="contact-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="da012da6-b94b-4397-8727-e24f64ba9bd7"
+            />
+            <input
+              type="hidden"
+              name="from_name"
+              value="Portafolio de Sebastián Aguirre"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="sr-only"
+              tabindex="-1"
+              autocomplete="off"
+            />
             <div class="field-row">
               <label>
                 Nombre

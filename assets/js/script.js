@@ -1,6 +1,6 @@
 const CONTACT = {
   email: "sebastian.aguirre@ug.uchile.cl",
-  whatsapp: "",
+  whatsapp: "56994226803",
 };
 
 const projects = [
@@ -142,22 +142,45 @@ function configureContact() {
   }
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const data = new FormData(form);
-  const subject = encodeURIComponent(data.get("subject"));
-  const body = encodeURIComponent(
-    "Hola Sebastián,\n\n" +
-      data.get("message") +
-      "\n\n— " +
-      data.get("name") +
-      "\n" +
-      data.get("email"),
-  );
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerHTML;
+  const formData = new FormData(form);
 
-  window.location.href =
-    "mailto:" + CONTACT.email + "?subject=" + subject + "&body=" + body;
+  submitButton.disabled = true;
+  submitButton.innerHTML = "Enviando...";
+  note.textContent = "Enviando tu mensaje de forma segura...";
+  note.style.color = "#999995";
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "No fue posible enviar el mensaje.");
+    }
+
+    form.reset();
+    note.textContent = "¡Mensaje enviado! Te responderé lo antes posible.";
+    note.style.color = "#b7f36b";
+  } catch (error) {
+    note.textContent =
+      "No se pudo enviar el mensaje. Inténtalo nuevamente o escríbeme por correo.";
+    note.style.color = "#ff8b8b";
+    console.error("Error al enviar el formulario:", error);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = originalButtonText;
+  }
 });
 
 configureContact();
