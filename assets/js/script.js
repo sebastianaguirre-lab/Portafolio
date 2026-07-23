@@ -5,11 +5,11 @@ const CONTACT = {
 
 const projects = [
   {
-    name: "Cuppon",
-    url: "https://sebastianaguirre-lab.github.io/cuppon/",
+    name: "Documentación Fullstack",
+    url: "https://sebastianaguirre-lab.github.io/documentacion-fullstack/",
     description:
-      "Sitio responsive de ofertas y cupones, construido con Bootstrap.",
-    tags: ["HTML", "CSS", "Bootstrap"],
+      "Base de conocimiento para desarrollo Fullstack con tutoriales, ejemplos prácticos y documentación técnica en un sitio generado con MkDocs.",
+    tags: ["MkDocs", "Markdown", "Fullstack", "Python", "Git"],
   },
   {
     name: "Ricomida",
